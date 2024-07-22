@@ -5,6 +5,7 @@ WORKDIR /app
 
 # Copia el archivo pom.xml y el código fuente al directorio de trabajo
 COPY pom.xml /app/
+COPY init.sql /app/
 COPY src /app/src
 
 # Ejecuta el comando Maven para compilar el proyecto
