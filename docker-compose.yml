@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  app_users:
+   build: ./
+   ports:
+    - "8080:8080"
+   depends_on:
+    - usersdb
+   environment:
+    SPRING_DATASOURCE_URL: jdbc:mysql://usersdb:3306/usersdb
+    SPRING_DATASOURCE_USERNAME: root
+    SPRING_DATASOURCE_PASSWORD: rootpassword
+  usersdb:
+   image: mysql:8.0.33
+   ports:
+    - "3306:3306"
+   volumes:
+    - db_data:/var/lib/mysql
+    - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+   environment: 
+    MYSQL_ROOT_PASSWORD: rootpassword
+    MYSQL_PASSWORD: rootpassword
+    MYSQL_DATABASE: usersdb
+
+volumes:
+  db_data:
+       
